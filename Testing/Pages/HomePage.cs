@@ -6,7 +6,7 @@ using Testing.Utilities;
 
 namespace Testing.Pages
 {
-    public class HomePage
+    class HomePage
     {
       public void GoToTMPage(IWebDriver driver)
        {
