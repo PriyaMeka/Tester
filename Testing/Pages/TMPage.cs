@@ -13,9 +13,6 @@ namespace Testing.Pages
     {
       public void CreateMaterial(IWebDriver driver)
             {
-           // try
-           // {
-
                 // click on Create New button
                 IWebElement createNewButton = driver.FindElement(By.XPath("//*[@id='container']/p/a"));
                 createNewButton.Click();
@@ -50,45 +47,42 @@ namespace Testing.Pages
                 IWebElement lastPageButton = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[4]/a[4]"));
                 lastPageButton.Click();
             Thread.Sleep(3000);
-                IWebElement actualCode= driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
-                IWebElement actualTypeCode = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[2]"));
-                IWebElement actualDescription = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[3]"));
-                IWebElement actualPrice = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[4]"));
-
-                //Console.WriteLine("Material created Successfully");
-            //}
-           // catch (Exception ex)
-            //{
-               // Assert.Fail("Material not created successfully",ex.Message);
-           // }
-
-            Assert.That(actualCode.Text == "test", "Actual code and Expected code do not match.");
-            Assert.That(actualTypeCode.Text == "M", "Actual typecode and Expected type do not match.");
-            Assert.That(actualDescription.Text == "This is my first test", "Actual description and Expected description do not match.");
-            Assert.That(actualPrice.Text == "$10,000.00","Actual price and Expected price do not match.");
 
         }
+        public string GetCode(IWebDriver driver)
+        {
+            IWebElement actualCode = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
+            return actualCode.Text;
+        }
 
-            public void EditMaterial(IWebDriver driver)
+        public string GetTypeCode(IWebDriver driver)
+        {
+            IWebElement actualTypeCode = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[2]"));
+            return actualTypeCode.Text;
+        }
+        public string GetDescription(IWebDriver driver)
+        {
+            IWebElement actualDescription = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[3]"));
+            return actualDescription.Text;
+        }
+        public string GetPrice(IWebDriver driver)
+        {
+            IWebElement actualPrice = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[4]"));
+            return actualPrice.Text;
+        }
+
+        public void EditMaterial(IWebDriver driver, string description)
             {
             Thread.Sleep(3000);
-            //try
-            //{
             //Click on last page button
             IWebElement lastPageButton = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[4]/a[4]"));
             lastPageButton.Click();
             IWebElement findCreatedRecord = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
             Thread.Sleep(3000);
-            if (findCreatedRecord.Text == "test")
-            {
+            //click on edit button
                 IWebElement editButton = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[5]/a[1]"));
                 editButton.Click();
-                Thread.Sleep(2000);
-            }
-            else
-            {
-                Assert.Fail("Record not found,Record cannot be edited");
-            }
+                
                 //identify the code textbox and enter the valid code no more than 20 characters
                 IWebElement codeTextbox = driver.FindElement(By.Id("Code"));
                 codeTextbox.Clear();
@@ -98,7 +92,7 @@ namespace Testing.Pages
                 //identify the description textbox and enter the valid description
                 IWebElement descriptionTextbox = driver.FindElement(By.Id("Description"));
                 descriptionTextbox.Clear();
-                descriptionTextbox.SendKeys("This is my edited test");
+                descriptionTextbox.SendKeys(description);
 
                 //identify the price number and enter the valid price
 
@@ -121,23 +115,18 @@ namespace Testing.Pages
             //assertion
             IWebElement editedCode = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]"));
             IWebElement editedTypeCode = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[2]"));
-            IWebElement editedDescription = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[3]"));
             IWebElement editedPrice = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[4]"));
 
             // Assertion
             Assert.That(editedCode.Text == "test1", "Actual code and expected code do not match.");
             Assert.That(editedTypeCode.Text == "M", "Actual typecode and expected typecode do not match.");
-            Assert.That(editedDescription.Text == "This is my edited test", "Actual description and expected description do not match.");
             Assert.That(editedPrice.Text == "$50,000.00", "Actual price and expected price do not match.");
 
-
-            // }
-            //catch (Exception ex)
-            //{
-            // Assert.Fail("Material not edited successfully",ex.Message);
-            // }
-            // Assert.That(editedRecord.Text == "test1", "Actual edited record and Expected edited record do not match.");
-
+        }
+        public string GetEditedDescription(IWebDriver driver)
+        {
+            IWebElement editedDescription = driver.FindElement(By.XPath("//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[3]"));
+            return editedDescription.Text;
         }
 
         public void DeleteMaterial(IWebDriver driver)
