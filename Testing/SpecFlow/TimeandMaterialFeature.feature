@@ -14,12 +14,17 @@ Scenario: Create time and material record with valid details
 Scenario Outline: Edit existing time and material record with valid details
 	Given Logged into turnup portal successfully 
 	And   Navigate to time and material page..
-	When  I update '<Description>' an existing time and material record.
-	Then the record should have an updated '<Description>'.
+	When  I update '<Code>' and '<Description>' an existing time and material record.
+	Then  the record should have an updated '<Code>' and '<Description>'.
 
 	Examples: 
-	| Description   |
-	| Time          |
-	| Material      |
-	| Edited Record |
+	| Code  | Description |
+	| Test  | Time        |
+	| Test1 | Material    |
+    | Test2 | Edited Record |
 
+Scenario: Delete existing time and material record.
+    Given Logged into turnup portal successfully 
+	And   Navigate to time and material page..
+	When  I deleted a time and material record.
+	Then the record should be deleted successfully 

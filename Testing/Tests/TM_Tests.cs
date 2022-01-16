@@ -35,7 +35,7 @@ namespace Testing
 
             // TM page object initialization and definition
             TMPage tmPageObj = new TMPage();
-            tmPageObj.EditMaterial(driver, "dummy");
+            tmPageObj.EditMaterial(driver, "dummy","dummy1");
         }
         
         [Test, Order (3), Description("Check if user is able to delete an existing material record")]
