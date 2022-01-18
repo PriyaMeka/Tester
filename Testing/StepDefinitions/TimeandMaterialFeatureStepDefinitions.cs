@@ -45,7 +45,7 @@ namespace Testing.StepDefinitions
 
 
             Assert.That(actualCode == "test", "Actual code and Expected code do not match.");
-            Assert.That(actualTypeCode == "T", "Actual typecode and Expected type do not match.");
+            Assert.That(actualTypeCode == "M", "Actual typecode and Expected type do not match.");
             Assert.That(actualDescription == "This is my first test", "Actual description and Expected description do not match.");
             Assert.That(actualPrice == "$10,000.00", "Actual price and Expected price do not match.");
 
@@ -65,7 +65,7 @@ namespace Testing.StepDefinitions
 
             Assert.That(editedCode == Code, "Actual code and expected code do not match.");
             Assert.That(editedDescription == Description, "Actual description and expected description do not match.");
-            Assert.That(editedTypeCode == "T", "Actual Typecode and expected Typecode do not match.");
+            Assert.That(editedTypeCode == "M", "Actual Typecode and expected Typecode do not match.");
             Assert.That(editedPrice == "$50,000.00", "Actual price and expected price do not match.");
         }
         [When(@"I deleted a time and material record\.")]
